@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.lospibescompany.menuactivity.MainActivity;
 import com.lospibescompany.menuactivity.databinding.FragmentHomeBinding;
+import com.lospibescompany.menuactivity.ui.gallery.GalleryViewModel;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel vm =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+        GalleryViewModel gm =
+                new ViewModelProvider(this).get(GalleryViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -32,7 +35,12 @@ public class HomeFragment extends Fragment {
         binding.buttonNota.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vm.agregarNota(MainActivity.notas,binding.nombreNota.getText()+"");
+                gm.getActividades().observe(getActivity(), new Observer<List<String>>() {
+                    @Override
+                    public void onChanged(List<String> strings) {
+                        vm.agregarNota(MainActivity.notas,binding.nombreNota.getText()+"");
+                    }
+                });
             }
         });
 

@@ -18,27 +18,22 @@ import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<String>> actividadesMutableLiveData;
-
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        actividadesMutableLiveData = new MutableLiveData<>();
     }
 
-    public void agregarNota(List notas, String nota){
+    public List<String> agregarNota(List notas, String nota){
         if(nota.length() == 0){
             Toast.makeText(getApplication(), "Ingrese una nota!", Toast.LENGTH_SHORT).show();
+            return notas;
         }
-        else{
-            
+        else {
             notas.add(nota);
-            Toast.makeText(getApplication(), "Nota Agregada!", Toast.LENGTH_SHORT).show();
-            actividadesMutableLiveData.setValue(notas); ;
+            Toast.makeText(getApplication(), "Nota agregada!", Toast.LENGTH_SHORT).show();
+            return notas;
         }
+
     }
 
-    public LiveData<List<String>> getActividades() {
-        return actividadesMutableLiveData;
-    }
 
 }

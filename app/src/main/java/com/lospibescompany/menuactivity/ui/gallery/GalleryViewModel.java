@@ -28,6 +28,10 @@ public class GalleryViewModel extends AndroidViewModel {
         actividadesMutableLiveData.setValue(actividades);
     }
 
+    public void actualizarLista(List<String> nuevaLista) {
+        actividadesMutableLiveData.postValue(nuevaLista);
+    }
+
     public MutableLiveData<List<String>> getActividades() {
         return actividadesMutableLiveData;
     }
